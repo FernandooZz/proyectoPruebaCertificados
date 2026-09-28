@@ -7,18 +7,15 @@ class Database {
     private $conn;
 
     public function __construct() {
-        // Cargar variables desde .env
-        $env = parse_ini_file(__DIR__ . '/.env');
+    $env = file_exists(__DIR__ . '/.env')
+        ? parse_ini_file(__DIR__ . '/.env')
+        : [];
 
-        if (!$env) {
-            throw new Exception('Archivo .env no encontrado');
-        }
-
-        $this->host = $env['DB_HOST'];
-        $this->db_name = $env['DB_NAME'];
-        $this->username = $env['DB_USER'];
-        $this->password = $env['DB_PASS'];
-    }
+    $this->host = getenv('DB_HOST') ?: ($env['DB_HOST'] ?? null);
+    $this->db_name = getenv('DB_NAME') ?: ($env['DB_NAME'] ?? null);
+    $this->username = getenv('DB_USER') ?: ($env['DB_USER'] ?? null);
+    $this->password = getenv('DB_PASS') ?: ($env['DB_PASS'] ?? null);
+}
 
     public function getConnection() {
         $this->conn = null;
