@@ -30,6 +30,10 @@ RUN sed -i 's/AllowOverride None/AllowOverride All/g' /etc/apache2/apache2.conf
 # Copiar backend completo
 COPY backend/ /var/www/html/
 
+RUN cd /var/www/html/src/library && composer install --no-dev --optimize-autoloader
+
+ENV APACHE_DOCUMENT_ROOT=/var/www/html/src
+
 # Apache debe servir backend/src
 ENV APACHE_DOCUMENT_ROOT=/var/www/html/src
 
