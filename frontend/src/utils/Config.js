@@ -1,6 +1,6 @@
 // Configuración de la API
 const Config = {
-  API_BASE_URL: import.meta.env.VITE_API_BASE_URL || 'http://localhost/certiflow/backend/src/',
+  API_BASE_URL: import.meta.env.PUBLIC_API_BASE_URL || 'http://localhost/certiflow/backend/src/',
 
   ENDPOINTS: {
     LOGIN: 'login.php',
